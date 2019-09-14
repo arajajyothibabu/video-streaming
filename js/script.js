@@ -134,7 +134,7 @@
                 window.history.pushState({}, "", "#" + roomName);
                 initWebRTC(roomName);
                 hideContent(true);*/
-                window.location.href = window.location.host + window.location.pathname +  "#" + getRoomName();
+                window.location.href = window.location.href +  "#" + getRoomName();
             };
         }
 
