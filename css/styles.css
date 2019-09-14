@@ -5,7 +5,32 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    width: 100%;
     background: aliceblue;
+    max-height: 100vh;
+    overflow: hidden;
+    top: 0;
+    bottom: 0;
+}
+
+video.fullscreen {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+video.thumbnail {
+    position: absolute;
+    height: 150px;
+    left: 8px;
+    bottom: 8px;
+    z-index: 3;
+}
+
+form {
+    margin-top: 15%;
 }
