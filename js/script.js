@@ -90,12 +90,16 @@
                 webrtc.on('readyToCall', function () {
                     webrtc.joinRoom(roomName);
                     copyToClipboard(window.location.href);
-                    M.toast({html: 'Share this link to invite.'})
+                    M.toast({html: 'Share this link to invite.'});
+                    hideContent(true);
                 });
 
                 webrtc.on('videoAdded', function (video, peer) {
                     console.log('video added', peer, video);
                     if (remoteVideos) {
+                        while (remoteVideos.firstChild){
+                            remoteVideos.removeChild(remoteVideos.firstChild);
+                        }
                         let d = document.createElement('div');
                         d.className = 'videoContainer';
                         d.id = 'container_' + webrtc.getDomId(peer);
@@ -154,10 +158,6 @@
                 e.preventDefault();
                 window.location.href = window.location.href +  "#" + getRoomName();
                 window.location.reload();
-                /*roomName = getRoomName();
-                window.history.pushState({}, "", "#" + roomName);
-                initWebRTC(roomName);
-                hideContent(true);*/
             };
         }
 
@@ -171,6 +171,7 @@
                 toggleBackground();
             } else {
                 window.location.href = "";
+                form.hidden = false;
                 toggleBackground(false);
             }
         };
