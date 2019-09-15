@@ -15,7 +15,7 @@ body {
 video.fullscreen {
     position: absolute;
     width: 100%;
-    height: auto;
+    height: 100vh;
     left: 0;
     right: 0;
     top: 0;
@@ -33,4 +33,11 @@ video.thumbnail {
 
 form {
     margin-top: 15%;
+}
+
+.radient {
+    background: radial-gradient(
+            circle at top right,
+            #16222A, #3A6073
+    )
 }

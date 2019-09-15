@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
     <title>Video Chat!</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="A simple, secure and hassle free video chatting.">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
+    <meta property="og:title" content="Video Chat!">
+    <meta property="og:site_name" content="Aascar Video Chat">
+    <meta property="og:url" content="https://video.aascar.in">
+    <meta property="og:description" content="A simple, secure and hassle free video chatting.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://video.aascar.in/aascar.png">
 </head>
 <body>
 <div class="row">
@@ -29,7 +38,8 @@
     <a class="btn-floating btn-large red">
         <i class="large material-icons">menu</i>
     </a>
-    <ul>
+    <ul id="actions">
+        <li title="Share"><a class="btn-floating yellow" id="share"><i class="material-icons">share</i></a></li>
         <li title="Copy Chat Link"><a class="btn-floating green" id="copy"><i class="material-icons">content_copy</i></a></li>
         <li title="Exit Chat"><a class="btn-floating red" id="exit"><i class="material-icons">close</i></a></li>
     </ul>

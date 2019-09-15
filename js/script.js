@@ -12,11 +12,17 @@
         const loading = document.getElementById("loading");
         const fab = document.querySelector(".fixed-action-btn");
 
+        const toggleBackground = (flag = true) => {
+            document.body.classList.toggle("radient", flag);
+        };
+
         if(hash && hash.length > 0){
             roomName = hash;
+            toggleBackground();
         } else {
             localVideo.hidden = true;
             fab.hidden = true;
+            document.getElementById("roomName").value = Math.random().toString(36).slice(-8);
         }
 
         const copyToClipboard = (text) => {
@@ -83,6 +89,8 @@
 
                 webrtc.on('readyToCall', function () {
                     webrtc.joinRoom(roomName);
+                    copyToClipboard(window.location.href);
+                    M.toast({html: 'Share this link to invite.'})
                 });
 
                 webrtc.on('videoAdded', function (video, peer) {
@@ -99,7 +107,9 @@
                         remoteVideos.appendChild(d);
                         //requestPIP(localVideo);
                         video.classList.add("thumbnail");
-                        toggleClasses(localVideo);
+                        if(localVideo.classList.contains("fullscreen")){
+                            toggleClasses(localVideo);
+                        }
                         toggleClasses(video);
                     }
                 });
@@ -112,6 +122,18 @@
                     }
                     toggleClasses(localVideo);
                 });
+
+                if(!navigator.share){
+                    const actions = document.getElementById("actions");
+                    actions.removeChild(actions.getElementsByTagName("li")[0]);
+                } else {
+                    document.getElementById("share").onclick = () => {
+                        if(navigator.share){
+                            let url = document.location.href;
+                            navigator.share({url: url});
+                        }
+                    }
+                }
 
                 M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {});
 
@@ -129,12 +151,13 @@
             initWebRTC(roomName);
         } else {
             form.onsubmit = (e) => {
-                /*e.preventDefault();
-                roomName = getRoomName();
+                e.preventDefault();
+                window.location.href = window.location.href +  "#" + getRoomName();
+                window.location.reload();
+                /*roomName = getRoomName();
                 window.history.pushState({}, "", "#" + roomName);
                 initWebRTC(roomName);
                 hideContent(true);*/
-                window.location.href = window.location.href +  "#" + getRoomName();
             };
         }
 
@@ -145,8 +168,10 @@
         const hideContent = (controls) => {
             if(controls){
                 form.hidden = true;
+                toggleBackground();
             } else {
                 window.location.href = "";
+                toggleBackground(false);
             }
         };
 
